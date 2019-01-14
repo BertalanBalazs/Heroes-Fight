@@ -6,21 +6,19 @@
 {% block content %}
     {% raw %}
         <div id="game">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-2">
-                        <div class="card" v-for="(item1,index) in stock1" @click="selectCard(index)">Column 1
-                          <img src="https://via.placeholder.com/150" class="card-img-top img-fluid" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ item1 }}</h5>
-                          </div>
-                        </div>
                     </div>
                     <div class="col-2">
                         <div class="card" v-for="(playeditem1,key) in playedcard1" @click="moveCard(key)">Column 2
-                          <img src="https://via.placeholder.com/150" class="card-img-top img-fluid" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ playeditem1 }}</h5>
+                            <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
+                                <video autoplay loop class="embed-responsive-item">
+                                    <source :src="playeditem1.src" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="card-body">
+                            <h5 class="card-title">{{ playeditem1.name }}</h5>
                           </div>
                         </div>
                     </div>
@@ -29,7 +27,21 @@
                     <div class="col-2">Column 5</div>
                 </div>
                 <div class="row">
-                    <div class="col-5">Column 1</div>
+                    <div class="col-5">Column 1
+                        <div class="row">
+                            <div class="card hand" v-for="(item1, key) in stock1" @click="selectCard(key)">Column 1
+                                <div align="center" class="embed-responsive embed-responsive-4by3">
+                                    <video autoplay loop class="embed-responsive-item">
+                                        <source :src="item1.src" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="card-body">
+                                <h5 class="card-title">{{ item1.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <div class="col-2">Column 2</div>
                     <div class="col-5">Column 3</div>
                 </div>
