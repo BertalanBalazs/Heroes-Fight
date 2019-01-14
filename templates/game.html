@@ -6,8 +6,34 @@
 {% block content %}
     {% raw %}
         <div id="game">
-            {{ macilaci }}
-            <button type="button" class="btn btn-secondary" @click="reverseMacilaci">Maci mégis laci!</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="card" v-for="(item1,index) in stock1" @click="selectCard(index)">Column 1
+                          <img src="https://via.placeholder.com/150" class="card-img-top img-fluid" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ item1 }}</h5>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card" v-for="(playeditem1,key) in playedcard1" @click="moveCard(key)">Column 2
+                          <img src="https://via.placeholder.com/150" class="card-img-top img-fluid" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ playeditem1 }}</h5>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-4">Column 3</div>
+                    <div class="col-2">Column 4</div>
+                    <div class="col-2">Column 5</div>
+                </div>
+                <div class="row">
+                    <div class="col-5">Column 1</div>
+                    <div class="col-2">Column 2</div>
+                    <div class="col-5">Column 3</div>
+                </div>
+            </div>
         </div>
     {% endraw %}
 {% endblock %}
