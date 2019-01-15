@@ -13,6 +13,7 @@ let app = new Vue({
         phase: 'student',
 
         student: {
+            heroSrc : 'static/media/student.png',
             stock:
                 [{
                     id: 0,
@@ -62,6 +63,7 @@ let app = new Vue({
             selectedCard: ''
         },
         mentor: {
+            heroSrc : 'static/media/mentor.png',
             stock:
                 [{
                     id: 100,
@@ -128,6 +130,13 @@ let app = new Vue({
             if (this.phase === 'student') this.phase='mentor';
             else if (this.phase === 'mentor') this.phase='battle';
             else this.phase='student';
+        },
+        waitTime: function (ms) {
+            const start = new Date().getTime()
+            let end = start
+            while (end < start + ms) {
+                end = new Date().getTime()
+            }
         }
     }
 });

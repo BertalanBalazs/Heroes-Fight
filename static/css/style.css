@@ -13,3 +13,12 @@ video{
 .col-5{
     background: #4b6164;
 }
+
+.field{
+    height: 20vh;
+    margin: 0px;
+}
+
+.card:hover{
+    background: rgba(147, 147, 147, 0.63);
+}

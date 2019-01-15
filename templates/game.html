@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {%  block head %}
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js" defer></script>
+<script src="{{ url_for('static', filename='js/texts.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock %}
 {% block content %}
@@ -8,18 +9,13 @@
 <div id="game">
     <div class="container-fluid">
         <div class="row game-status">
-
-            {{ mentor.selectedCard }}
-
-
-
-
         </div>
         <div class="row">
-            <div class="col-2">Column 1
+            <div class="col-2"><h1>Student</h1>
+                <img :src="student.heroSrc" class="img-fluid">
             </div>
-            <div class="col-2">Column 2
-                <div class="card" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
+            <div class="col-2">
+                <div class="card field" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
                     <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
                         <video autoplay loop class="embed-responsive-item">
                             <source :src="playeditem1.src" type="video/mp4">
@@ -30,9 +26,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">Column 3</div>
-            <div class="col-2">Column 4
-                <div class="card" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
+            <div class="col-4"></div>
+            <div class="col-2">
+                <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
                     <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
                         <video autoplay loop class="embed-responsive-item">
                             <source :src="playeditem2.src" type="video/mp4">
@@ -43,14 +39,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2">Column 5</div>
+            <div class="col-2"><h1>Mentor</h1>
+                <img :src="mentor.heroSrc" class="img-fluid">
+            </div>
         </div>
 
 
         <div class="row">
             <div class="col-5">
                 <div class="row">
-                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">Column 1
+                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
                             <video autoplay loop class="embed-responsive-item">
                                 <source :src="item1.src" type="video/mp4">
@@ -62,12 +60,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2">Column 2
+            <div class="col-2">
                 <button type="button" @click="nextPhase" class="btn btn-primary">{{ buttonText }}</button>
             </div>
             <div class="col-5">
                 <div class="row">
-                    <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">Column 1
+                    <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
                             <video autoplay loop class="embed-responsive-item">
                                 <source :src="item1.src" type="video/mp4">
