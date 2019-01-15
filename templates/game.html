@@ -1,51 +1,84 @@
 {% extends "layout.html" %}
 {%  block head %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"  defer></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js" defer></script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock %}
 {% block content %}
-    {% raw %}
-        <div id="game">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-2">
+{% raw %}
+<div id="game">
+    <div class="container-fluid">
+        <div class="row game-status">
+
+            {{ mentor.selectedCard }}
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-2">Column 1
+            </div>
+            <div class="col-2">Column 2
+                <div class="card" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
+                    <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
+                        <video autoplay loop class="embed-responsive-item">
+                            <source :src="playeditem1.src" type="video/mp4">
+                        </video>
                     </div>
-                    <div class="col-2">
-                        <div class="card" v-for="(playeditem1,key) in playedcard1" @click="moveCard(key)">Column 2
-                            <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
-                                <video autoplay loop class="embed-responsive-item">
-                                    <source :src="playeditem1.src" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="card-body">
-                            <h5 class="card-title">{{ playeditem1.name }}</h5>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-4">Column 3</div>
-                    <div class="col-2">Column 4</div>
-                    <div class="col-2">Column 5</div>
-                </div>
-                <div class="row">
-                    <div class="col-5">Column 1
-                        <div class="row">
-                            <div class="card hand" v-for="(item1, key) in stock1" @click="selectCard(key)">Column 1
-                                <div align="center" class="embed-responsive embed-responsive-4by3">
-                                    <video autoplay loop class="embed-responsive-item">
-                                        <source :src="item1.src" type="video/mp4">
-                                    </video>
-                                </div>
-                                <div class="card-body">
-                                <h5 class="card-title">{{ item1.name }}</h5>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ playeditem1.name }}</h5>
                     </div>
                 </div>
-                    <div class="col-2">Column 2</div>
-                    <div class="col-5">Column 3</div>
+            </div>
+            <div class="col-4">Column 3</div>
+            <div class="col-2">Column 4
+                <div class="card" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
+                    <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
+                        <video autoplay loop class="embed-responsive-item">
+                            <source :src="playeditem2.src" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ playeditem2.name }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">Column 5</div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-5">
+                <div class="row">
+                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">Column 1
+                        <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <video autoplay loop class="embed-responsive-item">
+                                <source :src="item1.src" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item1.name }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">Column 2</div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">Column 1
+                        <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <video autoplay loop class="embed-responsive-item">
+                                <source :src="item1.src" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item1.name }}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    {% endraw %}
+    </div>
+</div>
+{% endraw %}
 {% endblock %}

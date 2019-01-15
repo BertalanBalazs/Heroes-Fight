@@ -2,5 +2,14 @@ video{
     pointer-events: none;
 }
 
-.hand{
+.col-2{
+    background: #A5D6D9;
+}
+
+.col-4{
+    background: #648689;
+}
+
+.col-5{
+    background: #4b6164;
 }
