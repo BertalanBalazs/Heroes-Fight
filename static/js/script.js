@@ -2,7 +2,16 @@
 
 let app = new Vue({
     el: '#game',
+    computed: {
+        buttonText: function () {
+            if (this.phase === 'student') return 'End student\'s turn';
+            else if (this.phase === 'mentor') return 'End mentor\'s turn';
+            else return 'Battle';
+        }
+    },
     data: {
+        phase: 'student',
+
         student: {
             stock:
                 [{
@@ -105,15 +114,20 @@ let app = new Vue({
 
     methods: {
         selectCard: function (id, player) {
-            console.log(player, id);
+            if (this.phase !== player) return;
             this[player].selectedCard = this[player].stock.find(heroe => heroe.id === id);
             let index = this[player].stock.findIndex(element => element.id === id); //gives back the index of the selected card
             this[player].stock.splice(index,1)
         },
         moveCard: function (id, player) {
+            if (this.phase !== player) return;
             this[player].playedCard[id] = this[player].selectedCard;
-            console.log(this[player].selectedCard);
             this[player].selectedCard = ''
+        },
+        nextPhase: function () {
+            if (this.phase === 'student') this.phase='mentor';
+            else if (this.phase === 'mentor') this.phase='battle';
+            else this.phase='student';
         }
     }
 });

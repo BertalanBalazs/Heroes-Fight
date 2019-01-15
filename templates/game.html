@@ -62,7 +62,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2">Column 2</div>
+            <div class="col-2">Column 2
+                <button type="button" @click="nextPhase" class="btn btn-primary">{{ buttonText }}</button>
+            </div>
             <div class="col-5">
                 <div class="row">
                     <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">Column 1
