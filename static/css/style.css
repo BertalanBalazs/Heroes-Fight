@@ -6,6 +6,10 @@ video{
     background: #A5D6D9;
 }
 
+.col-3{
+    padding: 0;
+}
+
 .col-4{
     background: #648689;
 }
@@ -14,11 +18,23 @@ video{
     background: #4b6164;
 }
 
+.battlefield {
+    width: 70%;
+}
+
 .field{
     height: 20vh;
-    margin: 0px;
+    margin: 0;
 }
 
 .card:hover{
     background: rgba(147, 147, 147, 0.63);
+}
+
+.game-status{
+    height: 10vh;
+}
+
+video{
+    border-radius: 4px;
 }

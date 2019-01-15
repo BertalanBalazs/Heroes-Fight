@@ -9,33 +9,51 @@
 <div id="game">
     <div class="container-fluid">
         <div class="row game-status">
+
         </div>
         <div class="row">
             <div class="col-2"><h1>Student</h1>
                 <img :src="student.heroSrc" class="img-fluid">
             </div>
-            <div class="col-2">
-                <div class="card field" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
-                    <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
-                        <video autoplay loop class="embed-responsive-item">
-                            <source :src="playeditem1.src" type="video/mp4">
-                        </video>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card field" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
+                            <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
+                                <video autoplay loop class="embed-responsive-item">
+                                    <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ playeditem1.name }}</h5>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ playeditem1.name }}</h5>
+                    <div :key="battle.key" class="col-6">
+                        <p>{{ battle.student.text }} {{ battle.student.name }}</p>
+                        <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
+                            <video autoplay loop class="embed-responsive-item">
+                                <source :src="`static/media/${battle.student.image}_battle.mp4`" type="video/mp4">
+                            </video>
+                        </div>
+                        <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
+                            <video autoplay loop class="embed-responsive-item">
+                                <source :src="`static/media/${battle.mentor.image}_battle.mp4`" type="video/mp4">
+                            </video>
+                        </div>
+                        <p>{{ battle.mentor.text }}</p>
                     </div>
-                </div>
-            </div>
-            <div class="col-4"></div>
-            <div class="col-2">
-                <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
-                    <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
-                        <video autoplay loop class="embed-responsive-item">
-                            <source :src="playeditem2.src" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ playeditem2.name }}</h5>
+                    <div class="col-3">
+                        <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
+                            <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
+                                <video autoplay loop class="embed-responsive-item">
+                                    <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ playeditem2.name }}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,15 +61,13 @@
                 <img :src="mentor.heroSrc" class="img-fluid">
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-5">
                 <div class="row">
                     <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video autoplay loop class="embed-responsive-item">
-                                <source :src="item1.src" type="video/mp4">
+                            <video class="embed-responsive-item">
+                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>
                         </div>
                         <div class="card-body">
@@ -61,14 +77,15 @@
                 </div>
             </div>
             <div class="col-2">
-                <button type="button" @click="nextPhase" class="btn btn-primary">{{ buttonText }}</button>
+                <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText }}</button>
+                <h1 v-if="phase === 'battle'">Battle Started!</h1>
             </div>
             <div class="col-5">
                 <div class="row">
                     <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video autoplay loop class="embed-responsive-item">
-                                <source :src="item1.src" type="video/mp4">
+                            <video class="embed-responsive-item">
+                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>
                         </div>
                         <div class="card-body">
