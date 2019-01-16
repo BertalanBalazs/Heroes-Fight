@@ -29,20 +29,30 @@
                             </div>
                         </div>
                     </div>
-                    <div :key="battle.key" class="col-6">
-                        <p>{{ battle.student.text }} {{ battle.student.name }}</p>
-                        <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
-                            <video autoplay loop class="embed-responsive-item">
-                                <source :src="`static/media/${battle.student.image}_battle.mp4`" type="video/mp4">
-                            </video>
+
+
+                    <div class="col-6">
+                        <div class="row" v-for="(item, key) in battle" :key="key" v-if="phase === 'battle'">
+
+                            <div v-if="battlePhase === key">
+                                 <p>{{ item.student.text }}</p>
+                                  <div align="center"  class="embed-responsive embed-responsive-4by3 battlefield">
+                                    <video autoplay loop class="embed-responsive-item">
+                                        <source :src="`static/media/${item.student.src}_battle.mp4`" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
+                                    <video autoplay loop class="embed-responsive-item">
+                                        <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
+                                    </video>
+                                </div>
+                                <p>{{ item.mentor.text }}</p>
+                            </div>
                         </div>
-                        <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
-                            <video autoplay loop class="embed-responsive-item">
-                                <source :src="`static/media/${battle.mentor.image}_battle.mp4`" type="video/mp4">
-                            </video>
-                        </div>
-                        <p>{{ battle.mentor.text }}</p>
                     </div>
+
+
+
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
                             <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">

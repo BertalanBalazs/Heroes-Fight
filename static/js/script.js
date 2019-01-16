@@ -10,22 +10,20 @@ let app = new Vue({
         }
     },
     data: {
+        battlePhase: null,
         phase: 'student',
         battle: {
-            key: '',
-            student: {
-                name: '',
-                image: '',
-                text: '',
-                hp: 0,
-                attack: 0
+            firstrow: {
+                student: {},
+                mentor: {}
             },
-            mentor: {
-                name: '',
-                image: '',
-                text: '',
-                hp: 0,
-                attack: 0
+            secondrow: {
+                student: {},
+                mentor: {}
+            },
+            thirdrow: {
+                student: {},
+                mentor: {}
             }
         },
         student: {
@@ -142,23 +140,34 @@ let app = new Vue({
         moveCard: function (id, player) {
             if (this.phase !== player) return;
             this[player].playedCard[id] = this[player].selectedCard;
+            this.battle[id][player] = this[player].selectedCard
             this[player].selectedCard = ''
         },
-        startBattle: function () {
-            for( const key of ['firstrow', 'secondrow', 'thirdrow']) {
-                for( const player of ['student', 'mentor']) {
-                    // text
-                    const rand = Math.floor(Math.random() * this[player].texts.length);
-                    this.battle[player].text = this[player].texts[rand];
-                    /*this.battle[player].name = this[player].playedCard[key].name;*/
-                    this[player].texts.splice(rand, 1);
+        wait: async function() {
+            return new Promise(function(resolve) {
+            setTimeout(resolve, 4000);
+          });
+        },
+        startBattle: async function () {
+            this.battlePhase = 'firstrow'
+            this.getText('student')
+            this.getText('mentor')
+            await this.wait()
 
-                    // image
-                    this.battle[player].image = this[player].playedCard[key].src;
-                }
-                this.battle.key = key;
-                console.log(this.battle.student.name)
-            }
+            this.battlePhase = 'secondrow'
+            this.getText('student')
+            this.getText('mentor')
+            await this.wait()
+
+            this.battlePhase = 'thirdrow'
+            this.getText('student')
+            this.getText('mentor')
+            await this.wait()
+        },
+        getText: function (player) {
+            const rand = Math.floor(Math.random() * this[player].texts.length)
+            this.battle[this.battlePhase][player].text = this[player].texts[rand];
+            this[player].texts.splice(rand, 1)
         },
         nextPhase: function () {
             if (this.phase === 'student') this.phase='mentor';
