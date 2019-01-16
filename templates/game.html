@@ -109,7 +109,7 @@
         </div>
         <div class="col-5">
             <div class="row ">
-                <div class="card hand mentorhand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">
+                <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1" @click="selectCard(item1.id, 'mentor')">
                     <div align="center" class="embed-responsive embed-responsive-4by3">
                         <video class="embed-responsive-item">
                             <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">

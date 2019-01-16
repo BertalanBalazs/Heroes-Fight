@@ -10,7 +10,7 @@ var mentorStock = [
     {
         id: 101,
         name: 'hero2',
-        src: 'rudi',
+        src: 'menta',
         hp: 2,
         attack: 4,
         mana: 2
@@ -18,7 +18,7 @@ var mentorStock = [
     {
         id: 102,
         name: 'hero3',
-        src: 'rudi',
+        src: 'dani',
         hp: 4,
         attack: 1,
         mana: 2
@@ -34,7 +34,7 @@ var mentorStock = [
     {
         id: 104,
         name: 'hero5',
-        src: 'rudi',
+        src: 'menta',
         hp: 3,
         attack: 5,
         mana: 3
