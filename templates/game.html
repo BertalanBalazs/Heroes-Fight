@@ -26,7 +26,8 @@
                 <div class="row">
                     <!-- Student played out heroes -->
                     <div class="col-3">
-                        <div class="card field" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
+                        <div class="card field" v-for="(playeditem1,key) in student.playedCard"
+                             @click="moveCard(key, 'student')">
                             <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
                                 <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
@@ -50,19 +51,23 @@
                                     <p>{{ item.student.text }}</p>
                                     <div class="student-speech-bubble-ds-arrow"></div>
                                 </div>
-                                <img :src="student.heroSrc" class="img-fluid battleHero" v-if="item.student.id === 'heroStudent'">
-                                <div v-if="item.student.id !== 'heroStudent'" align="center" class="embed-responsive embed-responsive-4by3 battlefield">
+                                <img :src="student.heroSrc" class="img-fluid battleHero"
+                                     v-if="item.student.id === 'heroStudent'">
+                                <div v-if="item.student.id !== 'heroStudent'" align="center"
+                                     class="embed-responsive embed-responsive-4by3 battlefield">
                                     <video muted autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.student.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
                                 <!-- Mentor hero -->
-                                <div align="center" v-if="item.mentor.id !== 'heroMentor'" class="embed-responsive embed-responsive-4by3 battlefield" style="float: right">
+                                <div align="center" v-if="item.mentor.id !== 'heroMentor'"
+                                     class="embed-responsive embed-responsive-4by3 battlefield" style="float: right">
                                     <video muted autoplay loop class="embed-responsive-item">
-                                     <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
+                                        <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
-                                <img :src="mentor.heroSrc" class="img-fluid battleHero" v-if="item.mentor.id === 'heroMentor'" style="float: right">
+                                <img :src="mentor.heroSrc" class="img-fluid battleHero"
+                                     v-if="item.mentor.id === 'heroMentor'" style="float: right">
                                 <div class="speech-bubble-ds" style="float: right">
                                     <p>{{ item.mentor.text }}</p>
                                     <div class="mentor-speech-bubble-ds-arrow"></div>
@@ -71,89 +76,94 @@
                         </div>
                     </div>
 
-                <!-- Mentor played out heroes -->
-                <div class="col-3">
-                    <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
-                        <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
-                            <video muted autoplay loop class="embed-responsive-item">
-                                <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
+                    <!-- Mentor played out heroes -->
+                    <div class="col-3">
+                        <div class="card field" v-for="(playeditem2,key) in mentor.playedCard"
+                             @click="moveCard(key, 'mentor')">
+                            <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
+                                <video muted autoplay loop class="embed-responsive-item">
+                                    <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="card-body" v-if="playeditem2.src">
+                                <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
+                                    <h5 class="card-title">{{ playeditem2.attack }}</h5>
+                                    <img src="https://img.icons8.com/color/26/000000/hearts.png">
+                                    <h5 class="card-title">{{ playeditem2.hp }}</h5></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mentor main hero -->
+            <div class="col-2"><h1>Mentor</h1>
+                <img :src="mentor.heroSrc" class="img-fluid mentorImg">
+                <div class="speech-bubble-ds">
+                    <p>Mana: {{ mentor.leftoverMana }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Student heroes in hand-->
+            <div class="col-5">
+                <div class="row studentRow">
+                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')"
+                         v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
+                        <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <video class="embed-responsive-item">
+                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>
                         </div>
-                        <div class="card-body" v-if="playeditem2.src">
-                            <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
-                                <h5 class="card-title">{{ playeditem2.attack }}</h5>
+                        <div class="card-body">
+                            <div class="inline"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
+                                <h5 class="card-title">{{ item1.attack }}</h5>
                                 <img src="https://img.icons8.com/color/26/000000/hearts.png">
-                                <h5 class="card-title">{{ playeditem2.hp }}</h5></div>
+                                <h5 class="card-title">{{ item1.hp }}</h5></div>
+                            <div class="inline mana"><img
+                                    src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
+                                <h5 class="card-title"> {{ item1.mana }}</h5></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Mentor main hero -->
-        <div class="col-2"><h1>Mentor</h1>
-            <img :src="mentor.heroSrc" class="img-fluid mentorImg">
-            <div class="speech-bubble-ds">
-                <p>Mana: {{ mentor.leftoverMana }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <!-- Student heroes in hand-->
-        <div class="col-5">
-            <div class="row">
-                <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')"
-                     v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
-                    <div align="center" class="embed-responsive embed-responsive-4by3">
-                        <video class="embed-responsive-item">
-                            <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="card-body">
-                        <div class="inline"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
-                            <h5 class="card-title">{{ item1.attack }}</h5>
-                            <img src="https://img.icons8.com/color/26/000000/hearts.png">
-                            <h5 class="card-title">{{ item1.hp }}</h5></div>
-                        <div class="inline mana"><img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
-                            <h5 class="card-title"> {{ item1.mana }}</h5></div>
-                    </div>
+            <!-- Button for changing the phases -->
+            <div class="col-2">
+                <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText
+                    }}
+                </button>
+                <div class="speech-bubble-ds" v-if="phase === 'battle'">
+                    <p>Battle Started!</p>
                 </div>
             </div>
-        </div>
-        <!-- Button for changing the phases -->
-        <div class="col-2">
-            <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText }}
-            </button>
-            <div class="speech-bubble-ds" v-if="phase === 'battle'">
-                <p>Battle Started!</p>
-            </div>
-        </div>
-        <!-- Mentor heroes in hand-->
-        <div class="col-5">
-            <div class="row ">
-                <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1" @click="selectCard(item1.id, 'mentor')"
-                     v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
-                    <div align="center" class="embed-responsive embed-responsive-4by3">
-                        <video class="embed-responsive-item">
-                            <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="card-body">
-                        <div class="inline">
-                            <img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5 class="card-title">{{
-                            item1.attack }}</h5>
-                            <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
-                            item1.hp }}</h5>
+            <!-- Mentor heroes in hand-->
+            <div class="col-5">
+                <div class="row mentorRow">
+                    <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1"
+                         @click="selectCard(item1.id, 'mentor')"
+                         v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
+                        <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <video class="embed-responsive-item">
+                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
+                            </video>
                         </div>
-                        <div class="inline mana">
-                            <img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
-                            <h5 class="card-title"> {{ item1.mana }}</h5>
+                        <div class="card-body">
+                            <div class="inline">
+                                <img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5
+                                    class="card-title">{{
+                                item1.attack }}</h5>
+                                <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
+                                item1.hp }}</h5>
+                            </div>
+                            <div class="inline mana">
+                                <img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
+                                <h5 class="card-title"> {{ item1.mana }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endraw %}
 {% endblock %}
