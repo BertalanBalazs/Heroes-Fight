@@ -88,12 +88,12 @@ let app = new Vue({
         },
         moveCard: function (id, player) {
             if (this.phase !== player) return;
-            else {
+            else if (this[player].playedCard[id] === '') {
                 this[player].leftoverMana -= this[player].selectedCard.mana;
                 this[player].playedCard[id] = this[player].selectedCard;
                 this.battle[id][player] = this[player].selectedCard;
                 this[player].selectedCard = ''
-            }
+            } else console.log('Wrong place');
         },
         wait: async function() {
             return new Promise(function(resolve) {
