@@ -14,62 +14,29 @@ let app = new Vue({
         phase: 'student',
         battle: {
             firstrow: {
-                student: {},
-                mentor: {}
+                student: null,
+                mentor: null
             },
             secondrow: {
-                student: {},
-                mentor: {}
+                student: null,
+                mentor: null
             },
             thirdrow: {
-                student: {},
-                mentor: {}
+                student: null,
+                mentor: null
             }
         },
         student: {
             texts: texts.student,
             heroSrc : 'static/media/student.png',
-            stock:
-                [{
-                    id: 0,
-                    name: 'hero1',
-                    src: 'balazs',
-                    hp: 3,
-                    attack: 2,
-                    mana: 1
-                },
-                {
-                    id: 1,
-                    name: 'hero2',
-                    src: 'balazs',
-                    hp: 2,
-                    attack: 4,
-                    mana: 2
-                },
-                {
-                    id: 2,
-                    name: 'hero3',
-                    src: 'balazs',
-                    hp: 4,
-                    attack: 1,
-                    mana: 2
-                },
-                {
-                    id: 3,
-                    name: 'hero4',
-                    src: 'balazs',
-                    hp: 2,
-                    attack: 2,
-                    mana: 1
-                },
-                {
-                    id: 4,
-                    name: 'hero5',
-                    src: 'balazs',
-                    hp: 3,
-                    attack: 5,
-                    mana: 3
-                }],
+            hero: {
+                id: 'heroStudent',
+                name: 'Student',
+                src: 'student',
+                hp: 20,
+                attack: 0,
+            },
+            stock: studentStock,
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -78,49 +45,16 @@ let app = new Vue({
             selectedCard: ''
         },
         mentor: {
+            hero: {
+                id: 'heroMentor',
+                name: 'Mentor',
+                src: 'mentor',
+                hp: 20,
+                attack: 0,
+            },
             texts: texts.mentor,
             heroSrc : 'static/media/mentor.png',
-            stock:
-                [{
-                    id: 100,
-                    name: 'hero1',
-                    src: 'rudi',
-                    hp: 3,
-                    attack: 2,
-                    mana: 1
-                },
-                {
-                    id: 101,
-                    name: 'hero2',
-                    src: 'rudi',
-                    hp: 2,
-                    attack: 4,
-                    mana: 2
-                },
-                {
-                    id: 102,
-                    name: 'hero3',
-                    src: 'rudi',
-                    hp: 4,
-                    attack: 1,
-                    mana: 2
-                },
-                {
-                    id: 103,
-                    name: 'hero4',
-                    src: 'rudi',
-                    hp: 2,
-                    attack: 2,
-                    mana: 1
-                },
-                {
-                    id: 104,
-                    name: 'hero5',
-                    src: 'rudi',
-                    hp: 3,
-                    attack: 5,
-                    mana: 3
-                }],
+            stock: mentorStock,
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -149,20 +83,18 @@ let app = new Vue({
           });
         },
         startBattle: async function () {
-            this.battlePhase = 'firstrow'
-            this.getText('student')
-            this.getText('mentor')
-            await this.wait()
-
-            this.battlePhase = 'secondrow'
-            this.getText('student')
-            this.getText('mentor')
-            await this.wait()
-
-            this.battlePhase = 'thirdrow'
-            this.getText('student')
-            this.getText('mentor')
-            await this.wait()
+            for (let row of ['firstrow', 'secondrow', 'thirdrow']) {
+                for (let player of ['student', 'mentor']) {
+                    console.log(this.battle[row][player])
+                       if (this.battle[row][player] === null ) {
+                           console.log('maci')
+                          this.battle[row][player] = this[player].hero
+                    }
+                    this.battlePhase = row
+                    this.getText(player)
+                }
+                await this.wait()
+            }
         },
         getText: function (player) {
             const rand = Math.floor(Math.random() * this[player].texts.length)

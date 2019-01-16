@@ -2,6 +2,8 @@
 {%  block head %}
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js" defer></script>
 <script src="{{ url_for('static', filename='js/texts.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/mentor-cards.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/student-cards.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 {% endblock %}
 {% block content %}
@@ -36,16 +38,18 @@
 
                             <div v-if="battlePhase === key">
                                  <p>{{ item.student.text }}</p>
-                                  <div align="center"  class="embed-responsive embed-responsive-4by3 battlefield">
+                                <img :src="student.heroSrc" class="img-fluid" v-if="item.student.id === 'heroStudent'">
+                                  <div v-if="item.student.id !== 'heroStudent'" align="center"  class="embed-responsive embed-responsive-4by3 battlefield">
                                     <video autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.student.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
-                                <div align="center" v-if="phase === 'battle'" class="embed-responsive embed-responsive-4by3 battlefield">
+                                <div align="center" v-if="item.mentor.id !== 'heroMentor'" class="embed-responsive embed-responsive-4by3 battlefield">
                                     <video autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
+                                <img :src="student.heroSrc" class="img-fluid" v-if="item.mentor.id === 'heroMentor'">
                                 <p>{{ item.mentor.text }}</p>
                             </div>
                         </div>
