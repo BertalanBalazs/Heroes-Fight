@@ -9,25 +9,29 @@
 {% block content %}
 {% raw %}
 <div id="game">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><h3>{{ message }}</h3></a>
+    </nav>
     <div class="container-fluid">
-        <div class="row game-status">
-
-        </div>
         <div class="row">
             <div class="col-2"><h1>Student</h1>
-                <img :src="student.heroSrc" class="img-fluid">
+                <img :src="student.heroSrc" class="img-fluid studentImg">
             </div>
             <div class="col-8">
                 <div class="row">
                     <div class="col-3">
-                        <div class="card field" v-for="(playeditem1,key) in student.playedCard" @click="moveCard(key, 'student')">
+                        <div class="card field" v-for="(playeditem1,key) in student.playedCard"
+                             @click="moveCard(key, 'student')">
                             <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
                                 <video autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
                                 </video>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ playeditem1.name }}</h5>
+                            <div class="card-body" v-if="playeditem1.src">
+                                <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
+                                    <h5 class="card-title">{{ playeditem1.attack }}</h5>
+                                    <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">
+                                        {{ playeditem1.hp }}</h5></div>
                             </div>
                         </div>
                     </div>
@@ -35,81 +39,99 @@
 
                     <div class="col-6">
                         <div class="row" v-for="(item, key) in battle" :key="key" v-if="phase === 'battle'">
-
-                            <div v-if="battlePhase === key">
-                                 <p>{{ item.student.text }}</p>
-                                <img :src="student.heroSrc" class="img-fluid" v-if="item.student.id === 'heroStudent'">
-                                  <div v-if="item.student.id !== 'heroStudent'" align="center"  class="embed-responsive embed-responsive-4by3 battlefield">
+                            <div class="battlecard" v-if="battlePhase === key">
+                                <h2>{{ item.student.text }}</h2>
+                                <img :src="student.heroSrc" class="img-fluid battleHero" v-if="item.student.id === 'heroStudent'">
+                                <div v-if="item.student.id !== 'heroStudent'" align="center" class="embed-responsive embed-responsive-4by3 battlefield">
                                     <video autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.student.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
                                 <div align="center" v-if="item.mentor.id !== 'heroMentor'" class="embed-responsive embed-responsive-4by3 battlefield">
                                     <video autoplay loop class="embed-responsive-item">
-                                        <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
+                                     <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
-                                <img :src="student.heroSrc" class="img-fluid" v-if="item.mentor.id === 'heroMentor'">
-                                <p>{{ item.mentor.text }}</p>
+                                <img :src="mentor.heroSrc" class="img-fluid battleHero" v-if="item.mentor.id === 'heroMentor'">
+                                <h2>{{ item.mentor.text }}</h2>
                             </div>
                         </div>
                     </div>
 
 
-
-                    <div class="col-3">
-                        <div class="card field" v-for="(playeditem2,key) in mentor.playedCard" @click="moveCard(key, 'mentor')">
-                            <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
-                                <video autoplay loop class="embed-responsive-item">
-                                    <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ playeditem2.name }}</h5>
-                            </div>
+                <div class="col-3">
+                    <div class="card field" v-for="(playeditem2,key) in mentor.playedCard"
+                         @click="moveCard(key, 'mentor')">
+                        <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
+                            <video autoplay loop class="embed-responsive-item">
+                                <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" v-if="playeditem2.src">
+                            <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5
+                                    class="card-title">{{ playeditem2.attack }}</h5>
+                                <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
+                                    playeditem2.hp }}</h5></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-2"><h1>Mentor</h1>
-                <img :src="mentor.heroSrc" class="img-fluid">
             </div>
         </div>
-        <div class="row">
-            <div class="col-5">
-                <div class="row">
-                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">
-                        <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video class="embed-responsive-item">
-                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item1.name }}</h5>
-                        </div>
+        <div class="col-2"><h1>Mentor</h1>
+            <img :src="mentor.heroSrc" class="img-fluid mentorImg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <div class="row">
+                <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">
+                    <div align="center" class="embed-responsive embed-responsive-4by3">
+                        <video class="embed-responsive-item">
+                            <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="inline"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5
+                                class="card-title">{{ item1.attack }}</h5>
+                            <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
+                                item1.hp }}</h5></div>
+                        <div class="inline mana"><img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png"><h5
+                                class="card-title"> {{ item1.mana }}</h5></div>
                     </div>
                 </div>
             </div>
-            <div class="col-2">
-                <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText }}</button>
-                <h1 v-if="phase === 'battle'">Battle Started!</h1>
-            </div>
-            <div class="col-5">
-                <div class="row">
-                    <div class="card hand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">
-                        <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video class="embed-responsive-item">
-                                <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
-                            </video>
+        </div>
+        <div class="col-2">
+            <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText
+                }}
+            </button>
+            <h1 v-if="phase === 'battle'">Battle Started!</h1>
+        </div>
+        <div class="col-5">
+            <div class="row ">
+                <div class="card hand mentorhand" v-for="item1 in mentor.stock" @click="selectCard(item1.id, 'mentor')">
+                    <div align="center" class="embed-responsive embed-responsive-4by3">
+                        <video class="embed-responsive-item">
+                            <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="inline">
+                            <img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5 class="card-title">{{
+                            item1.attack }}</h5>
+                            <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
+                            item1.hp }}</h5>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item1.name }}</h5>
+                        <div class="inline mana">
+                            <img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
+                            <h5 class="card-title"> {{ item1.mana }}</h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endraw %}
 {% endblock %}

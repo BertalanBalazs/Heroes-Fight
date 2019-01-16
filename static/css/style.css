@@ -1,9 +1,19 @@
-video{
+body{
+    background-image: url("/static/media/fire.gif");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+
+}
+
+
+.embed-responsive video {
     pointer-events: none;
 }
 
 .col-2{
-    background: #A5D6D9;
+
 }
 
 .col-3{
@@ -11,30 +21,69 @@ video{
 }
 
 .col-4{
-    background: #648689;
+
 }
 
 .col-5{
-    background: #4b6164;
+
+}
+
+.card-body{
+
 }
 
 .battlefield {
     width: 70%;
 }
 
+.battlecard{
+    width: 80%;
+    transition: 1s;
+    float: left;
+    transition-duration: 3s;
+}
+
+.card{
+    border-radius: 8px;
+    color: black;
+    margin-right: 1%;
+}
+
+
 .field{
     height: 20vh;
-    margin: 0;
+    margin: 5%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 0px 61px 12px rgba(0,0,0,0.76);
 }
 
 .card:hover{
-    background: rgba(147, 147, 147, 0.63);
+    background: rgba(147, 147, 147, 0.49);
 }
 
 .game-status{
     height: 10vh;
 }
 
-video{
-    border-radius: 4px;
+.inline {
+    display: -webkit-box;
+}
+
+.mana , .inliner {
+    display: -webkit-box;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+}
+
+.mentorImg{
+    margin-top: 10%;
+}
+
+.studentImg{
+    width: 80%;
+}
+
+.battleHero{
+    width: 55%;
 }

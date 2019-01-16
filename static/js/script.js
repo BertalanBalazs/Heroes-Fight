@@ -7,6 +7,13 @@ let app = new Vue({
             if (this.phase === 'student') return 'End student\'s turn';
             else if (this.phase === 'mentor') return 'End mentor\'s turn';
             else return 'Battle';
+        },
+        message: function () {
+            if (this.phase === 'student') return 'Student please place your cards';
+            else if (this.phase === 'mentor') return 'Mentor please place your cards';
+            else if(this.battlePhase === 'firstrow') return 'Battle first round';
+            else if(this.battlePhase === 'secondrow') return 'Battle second round';
+            else if(this.battlePhase === 'thirdrow') return 'Battle third round';
         }
     },
     data: {
@@ -87,7 +94,6 @@ let app = new Vue({
                 for (let player of ['student', 'mentor']) {
                     console.log(this.battle[row][player])
                        if (this.battle[row][player] === null ) {
-                           console.log('maci')
                           this.battle[row][player] = this[player].hero
                     }
                     this.battlePhase = row
