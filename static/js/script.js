@@ -34,7 +34,8 @@ let app = new Vue({
             }
         },
         student: {
-            mana: 1,
+            manaPool: 1,
+            leftoverMana: 1,
             texts: texts.student,
             heroSrc : 'static/media/student.png',
             hero: {
@@ -53,6 +54,10 @@ let app = new Vue({
             selectedCard: ''
         },
         mentor: {
+            manaPool: 0,
+            leftoverMana: 1,
+            texts: texts.mentor,
+            heroSrc : 'static/media/mentor.png',
             hero: {
                 id: 'heroMentor',
                 name: 'Mentor',
@@ -60,9 +65,6 @@ let app = new Vue({
                 hp: 20,
                 attack: 0,
             },
-            mana: 1,
-            texts: texts.mentor,
-            heroSrc : 'static/media/mentor.png',
             stock: mentorStock,
             playedCard: {
                 firstrow: '',
@@ -76,15 +78,22 @@ let app = new Vue({
     methods: {
         selectCard: function (id, player) {
             if (this.phase !== player) return;
-            this[player].selectedCard = this[player].stock.find(hero => hero.id === id);
-            let index = this[player].stock.findIndex(element => element.id === id); //gives back the index of the selected card
-            this[player].stock.splice(index,1)
+            let selectedHero = this[player].stock.find(hero => hero.id === id);
+            if (selectedHero.mana<=this[player].leftoverMana) {
+                this[player].selectedCard = selectedHero;
+                //gives back the index of the selected card
+                let index = this[player].stock.findIndex(element => element.id === id);
+                this[player].stock.splice(index, 1)
+            }
         },
         moveCard: function (id, player) {
             if (this.phase !== player) return;
-            this[player].playedCard[id] = this[player].selectedCard;
-            this.battle[id][player] = this[player].selectedCard;
-            this[player].selectedCard = ''
+            else {
+                this[player].leftoverMana -= this[player].selectedCard.mana;
+                this[player].playedCard[id] = this[player].selectedCard;
+                this.battle[id][player] = this[player].selectedCard;
+                this[player].selectedCard = ''
+            }
         },
         wait: async function() {
             return new Promise(function(resolve) {
@@ -103,6 +112,7 @@ let app = new Vue({
                 }
                 await this.wait()
             }
+            this.nextPhase()
         },
         getText: function (player) {
             const rand = Math.floor(Math.random() * this[player].texts.length);
@@ -110,12 +120,19 @@ let app = new Vue({
             this[player].texts.splice(rand, 1)
         },
         nextPhase: function () {
-            if (this.phase === 'student') this.phase='mentor';
-            else if (this.phase === 'mentor') {
+            if (this.phase === 'student') {
+                this.mentor.manaPool++;
+                this.mentor.leftoverMana = this.mentor.manaPool;
+                this.phase='mentor';
+            } else if (this.phase === 'mentor') {
                 this.phase='battle';
                 this.startBattle()
             }
-            else this.phase='student';
+            else {
+                this.student.manaPool++;
+                this.student.leftoverMana = this.student.manaPool;
+                this.phase='student';
+            }
         },
     }
 });
