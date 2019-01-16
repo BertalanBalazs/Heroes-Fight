@@ -9,21 +9,24 @@
 {% block content %}
 {% raw %}
 <div id="game">
+    <!-- Navigation bar on top -->
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#"><h3>{{ message }}</h3></a>
     </nav>
     <div class="container-fluid">
         <div class="row">
+            <!-- Student main hero -->
             <div class="col-2"><h1>Student</h1>
                 <img :src="student.heroSrc" class="img-fluid studentImg">
             </div>
             <div class="col-8">
                 <div class="row">
+                    <!-- Student played out heroes -->
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem1,key) in student.playedCard"
                              @click="moveCard(key, 'student')">
                             <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
-                                <video autoplay loop class="embed-responsive-item">
+                                <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
                                 </video>
                             </div>
@@ -36,34 +39,42 @@
                         </div>
                     </div>
 
-
+                    <!-- Battle stage -->
                     <div class="col-6">
+                        <!-- Student hero -->
                         <div class="row" v-for="(item, key) in battle" :key="key" v-if="phase === 'battle'">
                             <div class="battlecard" v-if="battlePhase === key">
-                                <h2>{{ item.student.text }}</h2>
+                                <div class="speech-bubble-ds">
+                                    <p>{{ item.student.text }}</p>
+                                    <div class="student-speech-bubble-ds-arrow"></div>
+                                </div>
                                 <img :src="student.heroSrc" class="img-fluid battleHero" v-if="item.student.id === 'heroStudent'">
                                 <div v-if="item.student.id !== 'heroStudent'" align="center" class="embed-responsive embed-responsive-4by3 battlefield">
-                                    <video autoplay loop class="embed-responsive-item">
+                                    <video muted autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.student.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
+                                <!-- Mentor hero -->
                                 <div align="center" v-if="item.mentor.id !== 'heroMentor'" class="embed-responsive embed-responsive-4by3 battlefield">
-                                    <video autoplay loop class="embed-responsive-item">
+                                    <video muted autoplay loop class="embed-responsive-item">
                                      <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
                                     </video>
                                 </div>
                                 <img :src="mentor.heroSrc" class="img-fluid battleHero" v-if="item.mentor.id === 'heroMentor'">
-                                <h2>{{ item.mentor.text }}</h2>
+                                <div class="speech-bubble-ds">
+                                    <p>{{ item.mentor.text }}</p>
+                                    <div class="mentor-speech-bubble-ds-arrow"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-
+                <!-- Mentor played out heroes -->
                 <div class="col-3">
                     <div class="card field" v-for="(playeditem2,key) in mentor.playedCard"
                          @click="moveCard(key, 'mentor')">
                         <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
-                            <video autoplay loop class="embed-responsive-item">
+                            <video muted autoplay loop class="embed-responsive-item">
                                 <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
                             </video>
                         </div>
@@ -77,11 +88,13 @@
                 </div>
             </div>
         </div>
+        <!-- Mentor main hero -->
         <div class="col-2"><h1>Mentor</h1>
             <img :src="mentor.heroSrc" class="img-fluid mentorImg">
         </div>
     </div>
     <div class="row">
+        <!-- Student heroes in hand-->
         <div class="col-5">
             <div class="row">
                 <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')">
@@ -101,12 +114,15 @@
                 </div>
             </div>
         </div>
+        <!-- Button for changing the phases -->
         <div class="col-2">
-            <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText
-                }}
+            <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText }}
             </button>
-            <h1 v-if="phase === 'battle'">Battle Started!</h1>
+            <div class="speech-bubble-ds" v-if="phase === 'battle'">
+                <p>Battle Started!</p>
+            </div>
         </div>
+        <!-- Mentor heroes in hand-->
         <div class="col-5">
             <div class="row ">
                 <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1" @click="selectCard(item1.id, 'mentor')">

@@ -34,7 +34,8 @@ let app = new Vue({
             }
         },
         student: {
-            mana: 1,
+            manaPool: 1,
+            leftoverMana: 1,
             texts: texts.student,
             heroSrc : 'static/media/student.png',
             hero: {
@@ -60,7 +61,8 @@ let app = new Vue({
                 hp: 20,
                 attack: 0,
             },
-            mana: 1,
+            manaPool: 1,
+            leftoverMana: 1,
             texts: texts.mentor,
             heroSrc : 'static/media/mentor.png',
             stock: mentorStock,
@@ -77,7 +79,8 @@ let app = new Vue({
         selectCard: function (id, player) {
             if (this.phase !== player) return;
             this[player].selectedCard = this[player].stock.find(hero => hero.id === id);
-            let index = this[player].stock.findIndex(element => element.id === id); //gives back the index of the selected card
+            //gives back the index of the selected card
+            let index = this[player].stock.findIndex(element => element.id === id);
             this[player].stock.splice(index,1)
         },
         moveCard: function (id, player) {
@@ -103,6 +106,7 @@ let app = new Vue({
                 }
                 await this.wait()
             }
+            this.phase='student'
         },
         getText: function (player) {
             const rand = Math.floor(Math.random() * this[player].texts.length);
