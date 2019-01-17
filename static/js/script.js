@@ -92,7 +92,8 @@ let app = new Vue({
         },
         moveCard: function (row, player) {
             if (this.phase !== player) return;
-            else if (this[player].playedCard[row] === '' && this[player].leftoverMana>0) {
+            else if (this[player].playedCard[row] === '' && this[player].leftoverMana>=this[player].selectedCard.mana) {
+
                 this[player].leftoverMana -= this[player].selectedCard.mana;
                 this[player].playedCard[row] = this[player].selectedCard;
                 this.battle[row][player] = this[player].selectedCard;
