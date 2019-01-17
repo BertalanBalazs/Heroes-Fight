@@ -57,14 +57,16 @@
                     <!-- Student played out heroes -->
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem1,key) in student.playedCard"
-                             @click="moveCard(key, 'student')" onclick="document.getElementById('studentCardField').play();">
+                             @click="moveCard(key, 'student')" onclick="document.getElementById('studentCardField').play();"
+                             v-bind:style = "[playeditem1.mana > 3 ? {'background': 'gold'} : playeditem1.mana > 2 ? {'background': 'silver'} : playeditem1.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'}]">
                             <audio id="studentCardField" src="static/media/soundeffects/moveToField.ogg" type="audio/ogg"   preload="none"></audio>
+                            <p class="names">{{ playeditem1.name }}</p>
                             <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
                                 <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
                                 </video>
                             </div>
-                            <div class="card-body" v-if="playeditem1.src">
+                            <div class="fieldcard-body" v-if="playeditem1.src">
                                 <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
                                     <h5 class="card-title">{{ playeditem1.attack }}</h5>
                                     <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">
@@ -110,15 +112,16 @@
                     <!-- Mentor played out heroes -->
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem2,key) in mentor.playedCard"
-                             @click="moveCard(key, 'mentor')" onclick="document.getElementById('mentorCardField').play();">
+                             @click="moveCard(key, 'mentor')" onclick="document.getElementById('mentorCardField').play();"
+                             v-bind:style = "[playeditem2.mana > 3 ? {'background': 'gold'} : playeditem2.mana > 2 ? {'background': 'silver'} : playeditem2.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'}]">
                             <audio id="mentorCardField" src="static/media/soundeffects/moveToField.ogg" type="audio/ogg"   preload="none"></audio>
+                            <p class="names">{{ playeditem2.name }}</p>
                             <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
-
                                 <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
                                 </video>
                             </div>
-                            <div class="card-body" v-if="playeditem2.src">
+                            <div class="fieldcard-body" v-if="playeditem2.src">
                                 <div class="inliner"><img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
                                     <h5 class="card-title">{{ playeditem2.attack }}</h5>
                                     <img src="https://img.icons8.com/color/26/000000/hearts.png">
@@ -145,6 +148,7 @@
                          v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}
                          , item1.mana > 3 ? {'background': 'gold'} : item1.mana > 2 ? {'background': 'silver'} : item1.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'} ]"
                           onclick="document.getElementById('studentCardSelect').play();">
+                        <p class="names">{{ item1.name }}</p>
                         <div align="center" class="embed-responsive embed-responsive-4by3">
                             <audio id="studentCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"   preload="none"></audio>
                             <video muted class="embed-responsive-item">
@@ -181,8 +185,9 @@
                          v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'},
                          item1.mana > 3 ? {'background': 'gold'} : item1.mana > 2 ? {'background': 'silver'} : item1.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'}]"
                          onclick="document.getElementById('mentorCardSelect').play();">
-                        <audio id="mentorCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"></audio>
+                        <p class="names">{{ item1.name }}</p>
                         <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <audio id="mentorCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"></audio>
                             <video muted class="embed-responsive-item">
                                 <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>

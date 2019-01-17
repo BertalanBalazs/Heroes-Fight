@@ -1,25 +1,25 @@
 var mentorStock = [
     {
         id: 100,
-        name: 'hero1',
+        name: 'Rudi K.O.',
         src: 'rudi',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
-        hp: 3,
-        attack: 2,
+        hp: 2,
+        attack: 1,
         mana: 1
     },
     {
         id: 101,
-        name: 'hero2',
+        name: 'T.N.T László',
         src: 'laci',
         battleSound: 'static/media/soundeffects/menta.mp3',
-        hp: 2,
-        attack: 4,
+        hp: 3,
+        attack: 3,
         mana: 2
     },
     {
         id: 102,
-        name: 'hero3',
+        name: 'Dániel-ver',
         src: 'dani',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
         hp: 4,
@@ -28,8 +28,8 @@ var mentorStock = [
     },
     {
         id: 103,
-        name: 'hero4',
-        src: 'zozi',
+        name: 'Sylvester Forest',
+        src: 'sly',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
         hp: 2,
         attack: 2,
@@ -37,7 +37,7 @@ var mentorStock = [
     },
     {
         id: 104,
-        name: 'hero5',
+        name: 'Mentapmancs',
         src: 'menta',
         battleSound: 'static/media/soundeffects/menta.mp3',
         hp: 3,
@@ -46,26 +46,26 @@ var mentorStock = [
     },
     {
         id: 105,
-        name: 'hero5',
+        name: 'Réka-rate',
         src: 'reka',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
-        hp: 3,
-        attack: 5,
+        hp: 4,
+        attack: 4,
         mana: 3
     },
     {
         id: 106,
-        name: 'hero5',
+        name: 'Sylvester Forest',
         src: 'sly',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
-        hp: 6,
+        hp: 5,
         attack: 6,
         mana: 4
     },
     {
         id: 107,
-        name: 'hero5',
-        src: 'sly',
+        name: 'Zozi',
+        src: 'zozi',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
         hp: 1,
         attack: 3,
@@ -73,20 +73,20 @@ var mentorStock = [
     },
     {
         id: 108,
-        name: 'hero5',
+        name: 'Mentapmancs',
         src: 'menta',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
         hp: 1,
-        attack: 3,
-        mana: 1
+        attack: 5,
+        mana: 2
     },
     {
         id: 109,
-        name: 'hero5',
+        name: 'Rudi K.O.',
         src: 'rudi',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
-        hp: 1,
+        hp: 3,
         attack: 3,
-        mana: 1
+        mana: 2
     }
     ];
