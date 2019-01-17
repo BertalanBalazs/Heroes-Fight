@@ -82,7 +82,7 @@ let app = new Vue({
     },
     mounted: function () {
         console.log('mounted')
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             this.student.stock.push(this.student.allStock[i])
             this.mentor.stock.push(this.mentor.allStock[i])
             this.student.allStock.splice(i, 1)
