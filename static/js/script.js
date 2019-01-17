@@ -189,6 +189,8 @@ let app = new Vue({
         },
         endGame: function(winner) {
             this.winner = winner
+            var audio = new Audio('static/media/soundeffects/win.mp3');
+            audio.play();
             $('#myModal').modal('show')
         },
         nextPhase: function () {

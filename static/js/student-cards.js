@@ -3,7 +3,7 @@ var studentStock = [
         id: 0,
         name: 'Zámbó Árpy',
         src: 'balazs',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/box_sorozat.mp3',
         hp: 2,
         attack: 2,
         mana: 1
@@ -12,7 +12,7 @@ var studentStock = [
         id: 1,
         name: 'hero2',
         src: 'brigi',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/Punches.mp3',
         hp: 4,
         attack: 4,
         mana: 3
@@ -30,7 +30,7 @@ var studentStock = [
         id: 3,
         name: 'Uri Úr',
         src: 'jonatan',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/box_sorozat.mp3',
         hp: 1,
         attack: 2,
         mana: 1
@@ -39,7 +39,7 @@ var studentStock = [
         id: 4,
         name: 'Duke Nukem',
         src: 'gabor',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/kickass.mp3',
         hp: 3,
         attack: 5,
         mana: 3
@@ -48,7 +48,7 @@ var studentStock = [
         id: 5,
         name: 'Wrath of Tejfi',
         src: 'tejfi',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/Punches.mp3',
         hp: 2,
         attack: 4,
         mana: 2
@@ -64,9 +64,9 @@ var studentStock = [
     },
     {
         id: 7,
-        name: 'hero4',
+        name: 'Coca-pult',
         src: 'mav',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/box_sorozat.mp3',
         hp: 6,
         attack: 3,
         mana: 3
@@ -84,7 +84,7 @@ var studentStock = [
         id: 9,
         name: 'Ping Bang',
         src: 'zalaN',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/Punches.mp3',
         hp: 4,
         attack: 4,
         mana: 3

@@ -12,7 +12,7 @@ var mentorStock = [
         id: 101,
         name: 'T.N.T László',
         src: 'laci',
-        battleSound: 'static/media/soundeffects/menta.mp3',
+        battleSound: 'static/media/soundeffects/gun.mp3',
         hp: 3,
         attack: 3,
         mana: 2
@@ -21,7 +21,7 @@ var mentorStock = [
         id: 102,
         name: 'Dániel-ver',
         src: 'dani',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/auuu.mp3',
         hp: 4,
         attack: 1,
         mana: 2
@@ -30,7 +30,7 @@ var mentorStock = [
         id: 103,
         name: 'Sylvester Forest',
         src: 'sly',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/sly.mp3',
         hp: 2,
         attack: 2,
         mana: 1
@@ -39,7 +39,7 @@ var mentorStock = [
         id: 104,
         name: 'Mentapmancs',
         src: 'menta',
-        battleSound: 'static/media/soundeffects/menta.mp3',
+        battleSound: 'static/media/soundeffects/dogwhine.mp3',
         hp: 3,
         attack: 5,
         mana: 3
@@ -48,7 +48,7 @@ var mentorStock = [
         id: 105,
         name: 'Réka-rate',
         src: 'reka',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/pan.mp3',
         hp: 4,
         attack: 4,
         mana: 3
@@ -57,7 +57,7 @@ var mentorStock = [
         id: 106,
         name: 'Sylvester Forest',
         src: 'sly',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/sly.mp3',
         hp: 5,
         attack: 6,
         mana: 4
@@ -66,7 +66,7 @@ var mentorStock = [
         id: 107,
         name: 'Zozi',
         src: 'zozi',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/auuu.mp3',
         hp: 1,
         attack: 3,
         mana: 1
@@ -75,7 +75,7 @@ var mentorStock = [
         id: 108,
         name: 'Mentapmancs',
         src: 'menta',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/dogwhine.mp3',
         hp: 1,
         attack: 5,
         mana: 2
@@ -84,7 +84,7 @@ var mentorStock = [
         id: 109,
         name: 'Rudi K.O.',
         src: 'rudi',
-        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        battleSound: 'static/media/soundeffects/slap.mp3',
         hp: 3,
         attack: 3,
         mana: 2
