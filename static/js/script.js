@@ -124,6 +124,9 @@ let app = new Vue({
             this.endTurn()
         },
         getText: function (player) {
+            if (this[player].texts.length <= 0) {
+                this[player].texts = texts[player]
+            }
             const rand = Math.floor(Math.random() * this[player].texts.length);
             this.battle[this.battlePhase][player].text = this[player].texts[rand];
             this[player].texts.splice(rand, 1)
