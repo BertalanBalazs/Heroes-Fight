@@ -38,7 +38,7 @@ let app = new Vue({
         student: {
             manaPool: 1,
             leftoverMana: 1,
-            texts: texts.student,
+            texts: _.cloneDeep(texts.student),
             heroSrc : 'static/media/student.png',
             hero: {
                 id: 'heroStudent',
@@ -49,7 +49,7 @@ let app = new Vue({
                 attack: 0,
             },
             stock: [],
-            allStock: studentStock,
+            allStock: _.cloneDeep(studentStock),
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -60,7 +60,7 @@ let app = new Vue({
         mentor: {
             manaPool: 0,
             leftoverMana: 1,
-            texts: texts.mentor,
+            texts: _.cloneDeep(texts.mentor),
             heroSrc : 'static/media/mentor.png',
             hero: {
                 id: 'heroMentor',
@@ -71,7 +71,7 @@ let app = new Vue({
                 attack: 0,
             },
             stock: [],
-            allStock: mentorStock,
+            allStock: _.cloneDeep(mentorStock),
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -86,16 +86,25 @@ let app = new Vue({
     mounted: function () {
         console.log('mounted')
         for (i = 0; i < 6; i++) {
+            this.addCardToStock()
+        }
+        console.log(this.student.stock)
+    },
+    methods: {
+        addCardToStock: function () {
+            if (this.student.allStock.length <= 0) {
+                this.student.allStock = _.cloneDeep(studentStock)
+            }
+            if (this.mentor.allStock.length <= 0) {
+                this.mentor.allStock = _.cloneDeep(mentorStock)
+            }
             const randStudent = Math.floor(Math.random() * this.student.allStock.length);
             const randMentor = Math.floor(Math.random() * this.mentor.allStock.length);
             this.student.stock.push(this.student.allStock[randStudent])
             this.mentor.stock.push(this.mentor.allStock[randMentor])
             this.student.allStock.splice(randStudent, 1)
             this.mentor.allStock.splice(randMentor, 1)
-        }
-        console.log(this.student.stock)
-    },
-    methods: {
+        },
         selectCard: function (id, player) {
             if (this.phase !== player) return;
             let selectedHero = this[player].stock.find(hero => hero.id === id);
@@ -140,8 +149,8 @@ let app = new Vue({
             this.endTurn()
         },
         getText: function (player) {
-            if (this[player].texts.length <= 1) {
-                this[player].texts = texts[player]
+            if (this[player].texts.length <= 0) {
+                this[player].texts = _.cloneDeep(texts[player])
             }
             const rand = Math.floor(Math.random() * this[player].texts.length);
             this.battle[this.battlePhase][player].text = this[player].texts[rand];
@@ -155,6 +164,7 @@ let app = new Vue({
             console.log(this.phase)
             this.mentor.leftoverMana = this.mentor.leftoverMana + this.turn
             this.student.leftoverMana = this.student.leftoverMana + this.turn
+            this.addCardToStock()
 
         },
         fight: function(row) {
