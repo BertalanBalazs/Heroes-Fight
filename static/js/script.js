@@ -80,14 +80,20 @@ let app = new Vue({
             selectedCard: ''
         },
     },
+    created: function () {
+        console.log('created')
+    },
     mounted: function () {
         console.log('mounted')
         for (i = 0; i < 6; i++) {
-            this.student.stock.push(this.student.allStock[i])
-            this.mentor.stock.push(this.mentor.allStock[i])
-            this.student.allStock.splice(i, 1)
-            this.mentor.allStock.splice(i, 1)
+            const randStudent = Math.floor(Math.random() * this.student.allStock.length);
+            const randMentor = Math.floor(Math.random() * this.mentor.allStock.length);
+            this.student.stock.push(this.student.allStock[randStudent])
+            this.mentor.stock.push(this.mentor.allStock[randMentor])
+            this.student.allStock.splice(randStudent, 1)
+            this.mentor.allStock.splice(randMentor, 1)
         }
+        console.log(this.student.stock)
     },
     methods: {
         selectCard: function (id, player) {
