@@ -38,8 +38,8 @@ body {
 .field {
     height: 20vh;
     margin: 5%;
-    background: rgb(255, 255, 255);
     box-shadow: 0px 0px 61px 12px rgba(0, 0, 0, 0.76);
+    background: rgb(255, 247, 238);
 }
 
 .card:hover {

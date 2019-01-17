@@ -140,8 +140,10 @@
             <!-- Student heroes in hand-->
             <div class="col-5">
                 <div class="row studentRow">
-                    <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')"
-                         v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]" onclick="document.getElementById('studentCardSelect').play();">
+                    <div class="card hand" v-for="item1 in student.stock" :key="item1" @click="selectCard(item1.id, 'student')"
+                         v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}
+                         , item1.mana > 3 ? {'background': 'gold'} : item1.mana > 2 ? {'background': 'silver'} : item1.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'} ]"
+                          onclick="document.getElementById('studentCardSelect').play();">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
                             <audio id="studentCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"   preload="none"></audio>
                             <video muted class="embed-responsive-item">
@@ -175,7 +177,9 @@
                 <div class="row mentorRow">
                     <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1"
                          @click="selectCard(item1.id, 'mentor')"
-                         v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]" onclick="document.getElementById('mentorCardSelect').play();">
+                         v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'},
+                         item1.mana > 3 ? {'background': 'gold'} : item1.mana > 2 ? {'background': 'silver'} : item1.mana > 1 ? {'background': 'rgb(144,89,35)'} : {'background': 'white'}]"
+                         onclick="document.getElementById('mentorCardSelect').play();">
                         <audio id="mentorCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"></audio>
                         <div align="center" class="embed-responsive embed-responsive-4by3">
                             <video muted class="embed-responsive-item">
