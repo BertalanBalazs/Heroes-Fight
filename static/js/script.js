@@ -45,6 +45,7 @@ let app = new Vue({
                 name: 'Student',
                 src: 'student',
                 hp: 0,
+                battleSound: 'static/media/soundeffects/punch_08.mp3',
                 attack: 0,
             },
             stock: studentStock,
@@ -64,6 +65,7 @@ let app = new Vue({
                 id: 'heroMentor',
                 name: 'Mentor',
                 src: 'mentor',
+                battleSound: 'static/media/soundeffects/punch_08.mp3',
                 hp: 20,
                 attack: 20,
             },
@@ -105,12 +107,14 @@ let app = new Vue({
         startBattle: async function () {
             for (let row of ['firstrow', 'secondrow', 'thirdrow']) {
                 for (let player of ['student', 'mentor']) {
-                    console.log(this.battle[row][player]);
                        if (this.battle[row][player] === null ) {
                           this.battle[row][player] = this[player].hero
                     }
                     this.battlePhase = row;
-                    this.getText(player)
+                    this.getText(player);
+                    var audio = new Audio(this.battle[row][player].battleSound);
+                    audio.play();
+                    console.log(this.battle[row][player].battleSound)
                 }
                 await this.wait(3000)
                 this.fight(row)
