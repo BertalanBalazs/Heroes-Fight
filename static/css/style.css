@@ -10,7 +10,9 @@ body {
 .embed-responsive video {
     pointer-events: none;
 }
-
+.modal {
+    color: black;
+}
 .col-3 {
     padding: 0;
 }
