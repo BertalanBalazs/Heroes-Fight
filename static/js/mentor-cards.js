@@ -11,7 +11,7 @@ var mentorStock = [
     {
         id: 101,
         name: 'hero2',
-        src: 'menta',
+        src: 'laci',
         battleSound: 'static/media/soundeffects/menta.mp3',
         hp: 2,
         attack: 4,
@@ -29,7 +29,7 @@ var mentorStock = [
     {
         id: 103,
         name: 'hero4',
-        src: 'rudi',
+        src: 'zozi',
         battleSound: 'static/media/soundeffects/punch_08.mp3',
         hp: 2,
         attack: 2,
@@ -43,4 +43,50 @@ var mentorStock = [
         hp: 3,
         attack: 5,
         mana: 3
-    }];
+    },
+    {
+        id: 105,
+        name: 'hero5',
+        src: 'reka',
+        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        hp: 3,
+        attack: 5,
+        mana: 3
+    },
+    {
+        id: 106,
+        name: 'hero5',
+        src: 'sly',
+        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        hp: 6,
+        attack: 6,
+        mana: 4
+    },
+    {
+        id: 107,
+        name: 'hero5',
+        src: 'sly',
+        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        hp: 1,
+        attack: 3,
+        mana: 1
+    },
+    {
+        id: 108,
+        name: 'hero5',
+        src: 'menta',
+        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        hp: 1,
+        attack: 3,
+        mana: 1
+    },
+    {
+        id: 109,
+        name: 'hero5',
+        src: 'rudi',
+        battleSound: 'static/media/soundeffects/punch_08.mp3',
+        hp: 1,
+        attack: 3,
+        mana: 1
+    }
+    ];
