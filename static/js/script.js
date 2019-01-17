@@ -17,6 +17,7 @@ let app = new Vue({
         }
     },
     data: {
+        turn: 1,
         battlePhase: null,
         phase: 'student',
         battle: {
@@ -112,28 +113,41 @@ let app = new Vue({
                 }
                 await this.wait()
             }
-            this.nextPhase()
+            this.endTurn()
         },
         getText: function (player) {
             const rand = Math.floor(Math.random() * this[player].texts.length);
             this.battle[this.battlePhase][player].text = this[player].texts[rand];
             this[player].texts.splice(rand, 1)
         },
+        endTurn: function() {
+            console.log(this.phase)
+            this.turn++
+            if (this.turn % 2 === 0) this.phase = 'mentor'
+            else this.phase = 'student'
+            console.log(this.phase)
+            this.mentor.leftoverMana = this.mentor.leftoverMana + this.turn
+            this.student.leftoverMana = this.student.leftoverMana + this.turn
+
+        },
+        fight: function() {
+
+        },
+        endGame: function() {
+
+        },
         nextPhase: function () {
-            if (this.phase === 'student') {
-                this.mentor.manaPool++;
-                this.mentor.leftoverMana = this.mentor.manaPool;
+            if (this.phase === 'mentor' && this.turn % 2 === 0) {
+                this.phase='student'
+
+            } else if (this.phase === 'student' && this.turn % 2 !== 0) {
                 this.phase='mentor';
-            } else if (this.phase === 'mentor') {
+            }
+            else {
                 this.phase='battle';
                 this.startBattle()
             }
-            else {
-                this.student.manaPool++;
-                this.student.leftoverMana = this.student.manaPool;
-                this.phase='student';
-            }
-        },
+        }
     }
 });
 
