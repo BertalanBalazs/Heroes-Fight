@@ -48,7 +48,8 @@ let app = new Vue({
                 battleSound: 'static/media/soundeffects/punch_08.mp3',
                 attack: 0,
             },
-            stock: studentStock,
+            stock: [],
+            allStock: studentStock,
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -69,7 +70,8 @@ let app = new Vue({
                 hp: 20,
                 attack: 0,
             },
-            stock: mentorStock,
+            stock: [],
+            allStock: mentorStock,
             playedCard: {
                 firstrow: '',
                 secondrow: '',
@@ -78,7 +80,15 @@ let app = new Vue({
             selectedCard: ''
         },
     },
-
+    mounted: function () {
+        console.log('mounted')
+        for (i = 0; i < 5; i++) {
+            this.student.stock.push(this.student.allStock[i])
+            this.mentor.stock.push(this.mentor.allStock[i])
+            this.student.allStock.splice(i, 1)
+            this.mentor.allStock.splice(i, 1)
+        }
+    },
     methods: {
         selectCard: function (id, player) {
             if (this.phase !== player) return;
@@ -124,7 +134,7 @@ let app = new Vue({
             this.endTurn()
         },
         getText: function (player) {
-            if (this[player].texts.length <= 0) {
+            if (this[player].texts.length <= 1) {
                 this[player].texts = texts[player]
             }
             const rand = Math.floor(Math.random() * this[player].texts.length);
