@@ -17,6 +17,7 @@ let app = new Vue({
         }
     },
     data: {
+        winner: '',
         turn: 1,
         battlePhase: null,
         phase: 'student',
@@ -43,7 +44,7 @@ let app = new Vue({
                 id: 'heroStudent',
                 name: 'Student',
                 src: 'student',
-                hp: 20,
+                hp: 0,
                 attack: 0,
             },
             stock: studentStock,
@@ -64,7 +65,7 @@ let app = new Vue({
                 name: 'Mentor',
                 src: 'mentor',
                 hp: 20,
-                attack: 0,
+                attack: 20,
             },
             stock: mentorStock,
             playedCard: {
@@ -87,18 +88,18 @@ let app = new Vue({
                 this[player].stock.splice(index, 1)
             }
         },
-        moveCard: function (id, player) {
+        moveCard: function (row, player) {
             if (this.phase !== player) return;
-            else if (this[player].playedCard[id] === '' && this[player].leftoverMana>0) {
+            else if (this[player].playedCard[row] === '' && this[player].leftoverMana>0) {
                 this[player].leftoverMana -= this[player].selectedCard.mana;
-                this[player].playedCard[id] = this[player].selectedCard;
-                this.battle[id][player] = this[player].selectedCard;
+                this[player].playedCard[row] = this[player].selectedCard;
+                this.battle[row][player] = this[player].selectedCard;
                 this[player].selectedCard = ''
             } else console.log('Wrong place');
         },
-        wait: async function() {
+        wait: async function(ms=4000) {
             return new Promise(function(resolve) {
-            setTimeout(resolve, 4000);
+            setTimeout(resolve, ms);
           });
         },
         startBattle: async function () {
@@ -111,7 +112,9 @@ let app = new Vue({
                     this.battlePhase = row;
                     this.getText(player)
                 }
-                await this.wait()
+                await this.wait(3000)
+                this.fight(row)
+                await this.wait(3000)
             }
             this.endTurn()
         },
@@ -130,11 +133,29 @@ let app = new Vue({
             this.student.leftoverMana = this.student.leftoverMana + this.turn
 
         },
-        fight: function() {
-
+        fight: function(row) {
+            this.battle[row].student.hp = this.battle[row].student.hp - this.battle[row].mentor.attack
+            this.battle[row].mentor.hp = this.battle[row].mentor.hp - this.battle[row].student.attack
+            if (this.mentor.hero.hp <= 0) {
+                this.endGame('student')
+                return
+            }
+            if (this.student.hero.hp <= 0) {
+                this.endGame('mentor')
+                return
+            }
+            if (this.battle[row].student.hp <= 0){
+                this.battle[row].student = null
+                this.student.playedCard[row] = ''
+            }
+            if (this.battle[row].mentor.hp <= 0){
+               this.battle[row].mentor = null
+                this.mentor.playedCard[row] = ''
+            }
         },
-        endGame: function() {
-
+        endGame: function(winner) {
+            this.winner = winner
+            $('#myModal').modal('show')
         },
         nextPhase: function () {
             if (this.phase === 'mentor' && this.turn % 2 === 0) {
@@ -150,7 +171,6 @@ let app = new Vue({
         }
     }
 });
-
 
 
 
