@@ -44,7 +44,7 @@ let app = new Vue({
                 id: 'heroStudent',
                 name: 'Student',
                 src: 'student',
-                hp: 0,
+                hp: 20,
                 battleSound: 'static/media/soundeffects/punch_08.mp3',
                 attack: 0,
             },
@@ -67,7 +67,7 @@ let app = new Vue({
                 src: 'mentor',
                 battleSound: 'static/media/soundeffects/punch_08.mp3',
                 hp: 20,
-                attack: 20,
+                attack: 0,
             },
             stock: mentorStock,
             playedCard: {
