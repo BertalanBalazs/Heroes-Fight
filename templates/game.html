@@ -27,7 +27,8 @@
                     <!-- Student played out heroes -->
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem1,key) in student.playedCard"
-                             @click="moveCard(key, 'student')">
+                             @click="moveCard(key, 'student')" onclick="document.getElementById('studentCardField').play();">
+                            <audio id="studentCardField" src="static/media/soundeffects/moveToField.ogg" type="audio/ogg"   preload="none"></audio>
                             <div align="center" v-if="playeditem1.src" class="embed-responsive embed-responsive-4by3">
                                 <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem1.src}_waiting.mp4`" type="video/mp4">
@@ -61,7 +62,7 @@
                                 </div>
                                 <!-- Mentor hero -->
                                 <div align="center" v-if="item.mentor.id !== 'heroMentor'"
-                                     class="embed-responsive embed-responsive-4by3 battlefield" style="float: right">
+                                     class="embed-responsive embed-responsive-4by3 battlefield" style="float: right" >
                                     <video muted autoplay loop class="embed-responsive-item">
                                         <source :src="`static/media/${item.mentor.src}_battle.mp4`" type="video/mp4">
                                     </video>
@@ -79,8 +80,10 @@
                     <!-- Mentor played out heroes -->
                     <div class="col-3">
                         <div class="card field" v-for="(playeditem2,key) in mentor.playedCard"
-                             @click="moveCard(key, 'mentor')">
+                             @click="moveCard(key, 'mentor')" onclick="document.getElementById('mentorCardField').play();">
+                            <audio id="mentorCardField" src="static/media/soundeffects/moveToField.ogg" type="audio/ogg"   preload="none"></audio>
                             <div align="center" v-if="playeditem2.src" class="embed-responsive embed-responsive-4by3">
+
                                 <video muted autoplay loop class="embed-responsive-item">
                                     <source :src="`static/media/${playeditem2.src}_waiting.mp4`" type="video/mp4">
                                 </video>
@@ -108,9 +111,10 @@
             <div class="col-5">
                 <div class="row studentRow">
                     <div class="card hand" v-for="item1 in student.stock" @click="selectCard(item1.id, 'student')"
-                         v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
+                         v-bind:style="[item1.mana<=student.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]" onclick="document.getElementById('studentCardSelect').play();">
                         <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video class="embed-responsive-item">
+                            <audio id="studentCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"   preload="none"></audio>
+                            <video muted class="embed-responsive-item">
                                 <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>
                         </div>
@@ -128,8 +132,9 @@
             </div>
             <!-- Button for changing the phases -->
             <div class="col-2">
-                <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary">{{ buttonText
-                    }}
+                <button type="button" @click="nextPhase" v-if="phase !== 'battle'" class="btn btn-primary" onclick="document.getElementById('nextPhase').play();">
+                    <audio id="nextPhase" src="static/media/soundeffects/ready.ogg" type="audio/ogg"></audio>
+                    {{ buttonText }}
                 </button>
                 <div class="speech-bubble-ds" v-if="phase === 'battle'">
                     <p>Battle Started!</p>
@@ -140,19 +145,19 @@
                 <div class="row mentorRow">
                     <div class="card hand mentorhand" v-for="item1 in mentor.stock" :key="item1"
                          @click="selectCard(item1.id, 'mentor')"
-                         v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]">
+                         v-bind:style="[item1.mana<=mentor.leftoverMana ? {'border': '3px solid #00cc00'} : {'border': 'black'}]" onclick="document.getElementById('mentorCardSelect').play();">
+                        <audio id="mentorCardSelect" src="static/media/soundeffects/selectFromHand.ogg" type="audio/ogg"></audio>
                         <div align="center" class="embed-responsive embed-responsive-4by3">
-                            <video class="embed-responsive-item">
+                            <video muted class="embed-responsive-item">
                                 <source :src="`static/media/${item1.src}_battle.mp4`" type="video/mp4">
                             </video>
                         </div>
                         <div class="card-body">
                             <div class="inline">
-                                <img src="https://img.icons8.com/doodle/26/000000/small-axe.png"> <h5
-                                    class="card-title">{{
-                                item1.attack }}</h5>
-                                <img src="https://img.icons8.com/color/26/000000/hearts.png"><h5 class="card-title">{{
-                                item1.hp }}</h5>
+                                <img src="https://img.icons8.com/doodle/26/000000/small-axe.png">
+                                <h5 class="card-title">{{ item1.attack }}</h5>
+                                <img src="https://img.icons8.com/color/26/000000/hearts.png">
+                                <h5 class="card-title">{{ item1.hp }}</h5>
                             </div>
                             <div class="inline mana">
                                 <img src="https://img.icons8.com/ultraviolet/26/000000/crystal.png">
