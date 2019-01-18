@@ -10,7 +10,7 @@ var studentStock = [
     },
     {
         id: 1,
-        name: 'hero2',
+        name: 'Hero Fire',
         src: 'brigi',
         battleSound: 'static/media/soundeffects/Punches.mp3',
         hp: 4,
@@ -64,7 +64,7 @@ var studentStock = [
     },
     {
         id: 7,
-        name: 'Coca-pult',
+        name: 'Cocapult',
         src: 'mav',
         battleSound: 'static/media/soundeffects/box_sorozat.mp3',
         hp: 6,
@@ -82,7 +82,7 @@ var studentStock = [
     },
     {
         id: 9,
-        name: 'Ping Bang',
+        name: 'Zeus',
         src: 'zalaN',
         battleSound: 'static/media/soundeffects/Punches.mp3',
         hp: 4,

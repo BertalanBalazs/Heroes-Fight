@@ -64,7 +64,7 @@ var mentorStock = [
     },
     {
         id: 107,
-        name: 'Zozi',
+        name: 'Zozi Csehepuhé',
         src: 'zozi',
         battleSound: 'static/media/soundeffects/auuu.mp3',
         hp: 1,

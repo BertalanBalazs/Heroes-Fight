@@ -84,7 +84,7 @@ let app = new Vue({
         console.log('created')
     },
     mounted: function () {
-        console.log('mounted')
+        console.log('mounted');
         for (i = 0; i < 6; i++) {
             this.addCardToStock()
         }
@@ -142,8 +142,8 @@ let app = new Vue({
                     audio.play();
                     console.log(this.battle[row][player].battleSound)
                 }
-                await this.wait(3000)
-                this.fight(row)
+                await this.wait(3000);
+                this.fight(row);
                 await this.wait(3000)
             }
             this.endTurn()
@@ -157,38 +157,38 @@ let app = new Vue({
             this[player].texts.splice(rand, 1)
         },
         endTurn: function() {
-            console.log(this.phase)
-            this.turn++
-            if (this.turn % 2 === 0) this.phase = 'mentor'
-            else this.phase = 'student'
-            console.log(this.phase)
-            this.mentor.leftoverMana = this.mentor.leftoverMana + this.turn
-            this.student.leftoverMana = this.student.leftoverMana + this.turn
+            console.log(this.phase);
+            this.turn++;
+            if (this.turn % 2 === 0) this.phase = 'mentor';
+            else this.phase = 'student';
+            console.log(this.phase);
+            this.mentor.leftoverMana = this.mentor.leftoverMana + this.turn;
+            this.student.leftoverMana = this.student.leftoverMana + this.turn;
             this.addCardToStock()
 
         },
         fight: function(row) {
-            this.battle[row].student.hp = this.battle[row].student.hp - this.battle[row].mentor.attack
-            this.battle[row].mentor.hp = this.battle[row].mentor.hp - this.battle[row].student.attack
+            this.battle[row].student.hp = this.battle[row].student.hp - this.battle[row].mentor.attack;
+            this.battle[row].mentor.hp = this.battle[row].mentor.hp - this.battle[row].student.attack;
             if (this.mentor.hero.hp <= 0) {
-                this.endGame('student')
+                this.endGame('student');
                 return
             }
             if (this.student.hero.hp <= 0) {
-                this.endGame('mentor')
+                this.endGame('mentor');
                 return
             }
             if (this.battle[row].student.hp <= 0){
-                this.battle[row].student = null
+                this.battle[row].student = null;
                 this.student.playedCard[row] = ''
             }
             if (this.battle[row].mentor.hp <= 0){
-               this.battle[row].mentor = null
+               this.battle[row].mentor = null;
                 this.mentor.playedCard[row] = ''
             }
         },
         endGame: function(winner) {
-            this.winner = winner
+            this.winner = winner;
             var audio = new Audio('static/media/soundeffects/win.mp3');
             audio.play();
             $('#myModal').modal('show')
